@@ -7,7 +7,6 @@ import {
   Map, 
   Bell, 
   Sliders, 
-  Info, 
   Radio,
   Search
 } from 'lucide-react';
@@ -26,7 +25,6 @@ export default function Navbar({
     { id: 'risk-map', label: 'Risk Heatmap', icon: Map },
     { id: 'alerts', label: 'Early Warnings', icon: Bell },
     { id: 'action-tools', label: 'Action Tools', icon: Sliders },
-    { id: 'about', label: 'About & Pitch', icon: Info },
   ];
 
   // Helper to categorize 27 micro-zones into intuitive regional optgroups
