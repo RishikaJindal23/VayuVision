@@ -1,5 +1,6 @@
 """
-AirPulse: Machine Learning Pipeline Demonstration (train.py)
+VayuVision AI: Machine Learning Pipeline Demonstration (train.py)
+Team CodeStorms: Rishika Jindal, Navpreet Kaur, Yashika Bansal, Krishu Duggal
 
 Demonstrates:
 1. Structured time-series feature engineering (lag features, meteorological indicators, festive firecracker flags).
@@ -83,7 +84,8 @@ def generate_synthetic_festival_data(days=60):
 
 def run_model_training_benchmark():
     print("=" * 65)
-    print("AirPulse: Machine Learning Pipeline & Baseline Benchmark")
+    print("VayuVision AI: Machine Learning Pipeline & Baseline Benchmark")
+    print("Team CodeStorms: Rishika Jindal, Navpreet Kaur, Yashika Bansal, Krishu Duggal")
     print("=" * 65)
 
     df = generate_synthetic_festival_data(days=60)

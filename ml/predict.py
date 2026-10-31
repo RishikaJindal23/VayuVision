@@ -1,5 +1,6 @@
 """
-AirPulse: Machine Learning Inference Engine (predict.py)
+VayuVision AI: Machine Learning Inference Engine (predict.py)
+Team CodeStorms: Rishika Jindal, Navpreet Kaur, Yashika Bansal, Krishu Duggal
 
 Generates multi-phase hourly AQI predictions for supported micro-zones
 using environmental inputs and festive temporal indicators.
@@ -91,7 +92,7 @@ def predict_diwali_timeline(location_baseline_aqi: int, weather_profile: Dict[st
     return forecasts
 
 if __name__ == "__main__":
-    print("Testing AirPulse Inference Routine...")
+    print("Testing VayuVision AI Inference Routine...")
     sample_weather = {"wind_speed_kmh": 3.2, "humidity_pct": 74.0}
     results = predict_diwali_timeline(location_baseline_aqi=320, weather_profile=sample_weather)
     print(f"Generated {len(results)} forecast timeline steps:")
