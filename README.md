@@ -43,11 +43,11 @@ During Diwali and the onset of north Indian winter, neighbourhood air quality de
   - **Phase 3: Post-Diwali Dispersion (Days +1 to +3):** Stagnant air mass evacuation taking 48–72h to reset.
 
 ### C. Pollution Risk Heatmap
-- Interactive geospatial map powered by **Leaflet & OpenStreetMap / CartoDB Dark Tiles** centered on Delhi NCR.
-- Custom SVG markers with pulsing aura rings on active critical hotspots (Anand Vihar, Wazirpur, Punjabi Bagh).
+- Interactive geospatial map powered by **Leaflet with OpenStreetMap Streets & Esri Satellite Imagery** centered on Delhi NCR across **27 comprehensive micro-zones**.
+- Custom SVG markers with pulsing aura rings on active critical hotspots (Anand Vihar, Wazirpur, Jahangirpuri, Punjabi Bagh).
 - Interactive popup inspection cards displaying station telemetry, coordinates, and recommended municipal intervention.
 - Risk tier filters: `All Zones`, `Severe Hotspots`, `Severe (>400)`, `High (300-400)`, `Moderate`.
-- Dual-mode toggle: **Interactive Geo Map** & **Spatial Radar Grid** ensuring 100% functionality even in offline sandboxes.
+- Dual-mode toggle: **Interactive Geo Map** & **Spatial Radar Grid** with quick-jump 1-click zone buttons.
 
 ### D. Early-Warning Alerts & WhatsApp Simulator
 - Configurable alert threshold slider (200 to 450 AQI) dynamically updating active alerts.
@@ -166,7 +166,7 @@ flowchart TD
 | Method | Endpoint | Parameters | Description |
 | :--- | :--- | :--- | :--- |
 | `GET` | `/api/health` | None | Returns backend service and ML operational health |
-| `GET` | `/api/locations` | None | Returns list of 8 supported Delhi NCR micro-zones |
+| `GET` | `/api/locations` | None | Returns list of 27 supported Delhi NCR micro-zones |
 | `GET` | `/api/air-quality` | `location_id` | Latest available CPCB observation, gases, and weather |
 | `GET` | `/api/forecast` | `location_id`, `hours` (24/48/72) | Multi-horizon forecast with confidence intervals |
 | `GET` | `/api/risk-map` | None | Spatial risk indicators, hotspot statuses, and coordinates |
