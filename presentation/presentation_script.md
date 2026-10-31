@@ -148,27 +148,31 @@
 
 ---
 
-### Slide 8 — Impact & Future Scope: Environmental Intelligence
-- **Slide Title:** Impact & Future Scope: Environmental Intelligence
-- **Time Allocated:** 45–60 seconds
-- **Key Takeaway for Judges:** AirPulse has immediate utility for citizens, schools, and outdoor event planners, with a clear roadmap toward a full-scale environmental intelligence startup.
+### Slide 8 — Impact, Monetization & Startup Vision
+- **Slide Title:** Impact & Sustainable Revenue Model: Environmental Intelligence
+- **Time Allocated:** 60 seconds
+- **Key Takeaway for Judges:** AirPulse maximizes public health impact while sustaining high commercial profitability through a proven 3-tier B2B2C business model.
 
 #### Spoken Script (English):
-> "To conclude, AirPulse is designed for tangible societal impact.
+> "To conclude, AirPulse is designed as a dual-engine environmental intelligence startup: maximizing public impact while ensuring strong commercial profitability.
 >
-> In the short term, our platform helps vulnerable citizens, senior residents, parents of young children, schools, and sports academies make informed outdoor scheduling decisions during the most toxic week of the year.
+> On the public side, our core citizen dashboard is 100% free, empowering vulnerable families and students with timely exposure warnings.
 >
-> Looking ahead to our future scope and startup vision:
-> 1. We plan to train advanced temporal models like Temporal Convolutional Networks and XGBoost on multi-year festival datasets.
-> 2. We aim to integrate satellite aerosol optical depth from Sentinel-5P and low-cost hyperlocal sensor networks.
-> 3. We will expand coverage beyond Delhi NCR across industrial cities in northern India.
-> 4. We will deploy automated WhatsApp and push notification alerts for severe hourly threshold breaches.
+> On the commercial side, we generate sustainable revenue across three clear streams:
+> 1. **B2B CampusAir SaaS:** Schools and sports academies subscribe at ₹2,500/month for automated outdoor scheduling optimization and WhatsApp parent alerts. Just 100 schools yield ₹2.5 Lakhs Monthly Recurring Revenue.
+> 2. **B2B FleetSafe API:** Quick-commerce delivery fleets like Zomato, Swiggy, and Blinkit pay per-query to reroute delivery riders away from toxic chokepoints and dynamically trigger N95 mask mandates.
+> 3. **Contextual Clean Air Marketplace:** We earn 8% to 12% affiliate commission by connecting users in severe zones with verified, certified N95 respirators and room-sized HEPA purifiers.
 >
-> We believe clean air starts with clear awareness.
+> In subsequent rounds, we will validate advanced neural models like Temporal Convolutional Networks and integrate Sentinel-5P satellite aerosol data.
+>
+> Clean air starts with clear awareness.
 >
 > **AirPulse — Predict Pollution. Understand Exposure. Make Better Decisions.**
 >
 > Thank you, judges. We are now open for your questions!"
+
+#### Hinglish Delivery Tip:
+> *"Judges ko explicitly batayein: 'Humara common citizen app 100% free hai taaki logo ki jaan bache, aur humara revenue private schools, logistics fleets (Zomato/Blinkit) ke B2B subscription aur certified N95 masks ke affiliate commission se aata hai. Yani public good + solid profit dono locked hain!'"*
 
 ---
 *End of Presentation Script*

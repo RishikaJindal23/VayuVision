@@ -456,6 +456,46 @@ def evaluate_exposure_plan(req: ExposurePlanRequest):
         medical_disclaimer=disclaimer
     )
 
+@app.get("/api/business-model")
+def get_business_model():
+    """
+    Returns the AirPulse B2B2C Sustainable Monetization & Startup Strategy.
+    """
+    return {
+        "project": "AirPulse",
+        "philosophy": "Dual-Engine Strategy: 100% Free Public Good for Citizens + High-Margin B2B Enterprise Subscriptions",
+        "revenue_streams": [
+            {
+                "tier": "B2B SaaS (CampusAir)",
+                "target_clients": "Private Schools, Colleges, Sports Academies",
+                "value_proposition": "Automated morning assembly/sports schedule shift advisory + WhatsApp parent broadcast alerts",
+                "pricing": "₹2,000 - ₹5,000 / month per institution",
+                "unit_economics": "100 schools in Delhi NCR = ₹2.5 Lakhs Monthly Recurring Revenue (₹30L ARR)"
+            },
+            {
+                "tier": "B2B REST API (FleetSafe)",
+                "target_clients": "Zomato, Swiggy, Blinkit, Zepto, Amazon delivery fleets",
+                "value_proposition": "Dynamic routing to bypass toxic choke-points and trigger automated N95 respirator distribution",
+                "pricing": "₹0.30 per route query or ₹30,000 / month per logistics hub",
+                "unit_economics": "5 city logistics hubs = ₹1.5 Lakhs Monthly Revenue"
+            },
+            {
+                "tier": "Affiliate Clean Air Marketplace",
+                "target_clients": "Citizens residing in projected Severe (>350) zones",
+                "value_proposition": "Contextual recommendations for certified N95 masks & room-sized HEPA purifiers",
+                "pricing": "8% to 15% affiliate commission from Amazon / Flipkart / D2C brands",
+                "unit_economics": "10,000 festive peak orders = ₹1.5L - ₹3.0L high-margin cashflow"
+            },
+            {
+                "tier": "B2G Municipal Smart City Contracts (MuniPulse)",
+                "target_clients": "Municipal Corporation of Delhi (MCD), State Pollution Control Boards",
+                "value_proposition": "Predictive route planning for anti-smog guns & water sprinklers before evening inversion",
+                "pricing": "Annual Smart City Clean Air Mission contracts"
+            }
+        ],
+        "projected_year1_arr": "₹45 - 60 Lakhs (Delhi NCR)"
+    }
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

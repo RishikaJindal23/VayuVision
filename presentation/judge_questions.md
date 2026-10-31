@@ -65,13 +65,21 @@ This guide prepares the team for tough questions during the Round 1 hackathon ev
 
 ---
 
-### Q7: "What is your business model or startup vision for AirPulse?"
+### Q7: "What is your business model or startup vision for AirPulse? How do you actually make a profit?"
 
 **Suggested Winning Answer:**
-> "While AirPulse begins as a public-interest environmental intelligence tool for citizens, our long-term startup vision spans B2B and B2G enterprise applications:
-> 1. **B2B School & Sports Intelligence:** Private schools, sports academies, and marathon organizers need automated APIs and dashboards to schedule training sessions and outdoor sports during low-risk windows.
-> 2. **Logistics & Delivery Fleet Scheduling:** Quick-commerce and delivery fleets (Zomato, Swiggy, Amazon) can optimize outdoor rider shifts and provide dynamic hazard-pay or mask-distribution alerts.
-> 3. **Municipal & Event Advisory:** Municipal corporations and commercial festival venues can utilize our multi-zone forecasts to deploy localized smog guns and plan emergency vehicular diversions."
+> "We structured AirPulse as a sustainable B2B2C environmental intelligence startup with three clear revenue streams, ensuring our core citizen tool remains 100% free while enterprises fund the business:
+> 1. **B2B CampusAir SaaS (Schools & Sports Academies):**
+>    - Value Prop: Protects school children from toxic morning assembly exposure and automates WhatsApp advisory broadcasts to parents.
+>    - Pricing: ₹2,000 – ₹5,000 / month per institution. With just 100 schools in Delhi NCR, this yields ₹2.5 Lakhs Monthly Recurring Revenue (MRR) (~₹30 Lakhs ARR).
+> 2. **B2B Logistics FleetSafe API (Zomato, Swiggy, Blinkit, Zepto):**
+>    - Value Prop: Protects delivery riders during peak festive delivery surges by routing them away from critical particulate choke-points and dynamically triggering N95 mask mandates.
+>    - Pricing: ₹0.30 per routing query or ₹35,000 / month enterprise license per city hub.
+> 3. **Contextual Clean Air Marketplace (Affiliate Commerce):**
+>    - Value Prop: When neighbourhood AQI breaches 350+, users receive in-app recommendations for certified N95/FFP2 respirators and room-sized HEPA purifiers.
+>    - Pricing: 8% to 12% affiliate commission from Amazon/Flipkart/D2C brands. During Diwali peak week, 10,000 orders generate ₹1.5L – ₹3L in high-margin passive cashflow.
+> 4. **B2G Municipal Smart City Contracts:**
+>    - Predictive routing for municipal anti-smog water sprinklers to wet dust before nocturnal inversion traps it."
 
 ---
 

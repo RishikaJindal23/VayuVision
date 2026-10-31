@@ -125,6 +125,7 @@ export default function App() {
             { id: 'timeline', label: 'Diwali Timeline & Forecast', icon: TrendingUp },
             { id: 'comparison', label: 'Neighbourhood Comparison & Heatmap', icon: Layers },
             { id: 'planner', label: 'Personal Exposure Planner ⭐', icon: ShieldCheck, highlight: true },
+            { id: 'monetization', label: 'Startup & Revenue Model 💰', icon: Zap },
             { id: 'insights', label: 'Environmental Data & Alerts', icon: AlertTriangle },
             { id: 'presentation', label: 'Hackathon PPT & Docs', icon: Award }
           ].map(tab => {
@@ -581,6 +582,146 @@ export default function App() {
                   <p className="leading-relaxed text-slate-300">
                     AirPulse is an <strong className="text-white">environmental awareness and activity-scheduling tool</strong> based on atmospheric predictive models. It is <strong className="text-rose-400">NOT a medical diagnosis system</strong>, clinical advisory, or personalized health guarantee platform. It does not diagnose asthma, COPD, or clinical respiratory conditions, does not prescribe treatments or recommend changes to medication, and does not claim any outdoor activity is completely risk-free. AirPulse collects zero personal health or medical records. Consult a qualified medical practitioner for individual clinical guidance.
                   </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* =========================================================================
+            TAB: STARTUP & REVENUE MODEL 💰 (PROFIT ENGINE)
+           ========================================================================= */}
+        {activeTab === 'monetization' && (
+          <div className="space-y-6">
+            <div className="bg-gradient-to-r from-emerald-950/60 via-[#16213E] to-slate-900 border border-emerald-500/40 rounded-2xl p-6 shadow-xl">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold mb-2">
+                    <Zap className="w-3.5 h-3.5" /> Sustainable Commercial Viability
+                  </div>
+                  <h2 className="text-2xl font-bold text-white">Startup Revenue & Monetization Engine</h2>
+                  <p className="text-xs text-slate-300 max-w-2xl mt-1">
+                    AirPulse operates on a dual-engine model: <strong className="text-white">100% Free Public Good</strong> for common citizens, financed by high-margin <strong className="text-emerald-400">B2B SaaS subscriptions and enterprise APIs</strong>.
+                  </p>
+                </div>
+                <div className="bg-slate-900/90 border border-slate-700 p-4 rounded-xl text-center shrink-0">
+                  <span className="text-[11px] text-slate-400 block">Projected Year-1 ARR (Delhi NCR)</span>
+                  <span className="text-3xl font-black text-emerald-400">₹45 - 60 Lakhs</span>
+                  <span className="text-[10px] text-slate-400 block mt-0.5">High-margin B2B SaaS + Affiliate</span>
+                </div>
+              </div>
+            </div>
+
+            {/* 3 Core Revenue Streams */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+              {/* Stream 1: CampusAir B2B SaaS */}
+              <div className="bg-[#16213E] rounded-2xl p-5 border border-slate-800 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 uppercase">
+                      B2B SaaS Subscription
+                    </span>
+                    <span className="text-xs font-bold text-emerald-400">₹2,500 / month</span>
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-1">CampusAir for Schools & Colleges</h3>
+                  <p className="text-xs text-slate-400 mb-4">Protecting students during morning sports & assemblies</p>
+                  
+                  {/* Live Simulation Card */}
+                  <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800 space-y-2 text-xs mb-4">
+                    <span className="text-[11px] font-semibold text-slate-300 block">School Portal Alert Simulation:</span>
+                    <div className="p-2.5 rounded bg-rose-950/30 border border-rose-800/40 text-rose-200">
+                      <strong>⚠️ DPS R.K. Puram Advisory:</strong> Morning outdoor assembly moved indoors. High nocturnal inversion (AQI 425 at 8 AM). Outdoor sports rescheduled to 1:30 PM.
+                    </div>
+                    <span className="text-[10px] text-slate-400 block">Automated WhatsApp notifications broadcast to 1,800+ parents.</span>
+                  </div>
+                </div>
+
+                <div className="pt-3 border-t border-slate-800 text-xs text-slate-300">
+                  <span className="text-white font-semibold">Unit Economics:</span> 100 private schools in Delhi NCR = <strong>₹2,50,000 / month MRR (₹30L ARR)</strong>.
+                </div>
+              </div>
+
+              {/* Stream 2: FleetSafe B2B API */}
+              <div className="bg-[#16213E] rounded-2xl p-5 border border-slate-800 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 uppercase">
+                      Enterprise REST API
+                    </span>
+                    <span className="text-xs font-bold text-emerald-400">₹0.30 / query</span>
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-1">FleetSafe Delivery Optimizer</h3>
+                  <p className="text-xs text-slate-400 mb-4">Zomato, Swiggy, Blinkit rider health & route protection</p>
+                  
+                  {/* Live Simulation Card */}
+                  <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800 space-y-2 text-xs mb-4">
+                    <span className="text-[11px] font-semibold text-slate-300 block">Logistics Dispatch API Response:</span>
+                    <div className="p-2.5 rounded bg-slate-950 border border-slate-800 font-mono text-[11px] text-emerald-400">
+                      POST /api/v1/fleet/route-hazard<br/>
+                      {JSON.stringify({ bypass_zone: "Anand Vihar (AQI 490)", safe_alternate: "Vikas Marg Buffer", mandatory_n95: true }, null, 0)}
+                    </div>
+                    <span className="text-[10px] text-slate-400 block">Lowers rider sickness absenteeism by ~28% during Diwali week rush.</span>
+                  </div>
+                </div>
+
+                <div className="pt-3 border-t border-slate-800 text-xs text-slate-300">
+                  <span className="text-white font-semibold">Unit Economics:</span> 5 quick-commerce city hubs at ₹30,000/mo = <strong>₹1,50,000 / month</strong>.
+                </div>
+              </div>
+
+              {/* Stream 3: Certified Marketplace Affiliate */}
+              <div className="bg-[#16213E] rounded-2xl p-5 border border-slate-800 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30 uppercase">
+                      Affiliate Commerce
+                    </span>
+                    <span className="text-xs font-bold text-emerald-400">8% - 15% Comm.</span>
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-1">Certified Clean Air Store</h3>
+                  <p className="text-xs text-slate-400 mb-4">Contextual verified N95 masks & HEPA purifiers</p>
+                  
+                  {/* Live Simulation Card */}
+                  <div className="bg-slate-900/80 p-3 rounded-xl border border-slate-800 space-y-2 text-xs mb-4">
+                    <span className="text-[11px] font-semibold text-slate-300 block">Severe Exposure In-App Recommendations:</span>
+                    <div className="p-2 rounded bg-slate-950 border border-slate-800 flex items-center justify-between">
+                      <div>
+                        <span className="font-bold text-white block text-[11px]">Certified N95 Respirator Pack (10x)</span>
+                        <span className="text-[10px] text-emerald-400">Filters 99.4% PM2.5 • Tested</span>
+                      </div>
+                      <span className="text-xs font-bold text-white">₹399</span>
+                    </div>
+                    <div className="p-2 rounded bg-slate-950 border border-slate-800 flex items-center justify-between">
+                      <div>
+                        <span className="font-bold text-white block text-[11px]">HEPA H13 Room Air Purifier</span>
+                        <span className="text-[10px] text-emerald-400">CADR 350 m³/h • 350 sq ft</span>
+                      </div>
+                      <span className="text-xs font-bold text-white">₹7,999</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-3 border-t border-slate-800 text-xs text-slate-300">
+                  <span className="text-white font-semibold">Unit Economics:</span> 10,000 Diwali peak orders = <strong>₹1.5L - ₹3.0L zero-risk profit</strong>.
+                </div>
+              </div>
+            </div>
+
+            {/* B2G Municipal Smog Gun Dispatch */}
+            <div className="bg-[#16213E] rounded-2xl p-5 border border-slate-800">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 uppercase">
+                    B2G Government & Smart City Contracts
+                  </span>
+                  <h4 className="text-base font-bold text-white mt-1">MuniPulse: Predictive Anti-Smog Gun & Sprinkler Dispatch</h4>
+                  <p className="text-xs text-slate-400 max-w-2xl mt-0.5">
+                    Municipal corporations (MCD/DPCC) deploy water misting trucks blindly. AirPulse gives them a 6-hour advance route map to spray road dust in vulnerable neighbourhoods <em className="text-emerald-400 font-semibold">before</em> nocturnal temperature inversion traps particulate smoke.
+                  </p>
+                </div>
+                <div className="shrink-0 text-right">
+                  <span className="text-xs text-slate-400 block">Target Tender Category</span>
+                  <span className="text-sm font-bold text-amber-400">Smart City Clean Air Mission</span>
                 </div>
               </div>
             </div>

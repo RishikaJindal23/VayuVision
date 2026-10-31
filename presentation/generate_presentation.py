@@ -904,21 +904,21 @@ def build_presentation():
     p.font.color.rgb = TEXT_BODY
     p.space_before = Pt(6)
 
-    # Right: Future Scope
+    # Right: Future Scope & Revenue Model
     c_fut = add_card(slide8, Inches(6.81), y8, col_w8, col_h8)
     tx_fut = slide8.shapes.add_textbox(Inches(6.96), y8 + Inches(0.15), col_w8 - Inches(0.3), col_h8 - Inches(0.3))
     tf_fu = tx_fut.text_frame
     tf_fu.word_wrap = True
 
     p = tf_fu.paragraphs[0]
-    p.text = "FUTURE ROADMAP & STARTUP TRAJECTORY"
+    p.text = "SUSTAINABLE REVENUE & STARTUP MODEL"
     p.font.name = "Arial"
     p.font.size = Pt(11)
     p.font.bold = True
     p.font.color.rgb = ACCENT_CYAN
 
     p = tf_fu.add_paragraph()
-    p.text = "Scaling From Prototype to Enterprise"
+    p.text = "How AirPulse Monetizes (B2B2C Engine)"
     p.font.name = "Arial"
     p.font.size = Pt(14)
     p.font.bold = True
@@ -927,13 +927,13 @@ def build_presentation():
 
     p = tf_fu.add_paragraph()
     p.text = (
-        "• Validated Advanced ML Models: Train XGBoost, Temporal Convolutional Networks (TCN), or LSTMs on multi-year festival and meteorological datasets.\n\n"
-        "• Satellite & Hyperlocal IoT Mesh: Integrate Sentinel-5P satellite aerosol data and low-cost hyperlocal sensor meshes for sub-kilometre precision.\n\n"
-        "• Pan-India Urban Expansion: Broaden coverage to other industrial pollution hotspots across the Indo-Gangetic plain (Kanpur, Lucknow, Patna, Kolkata).\n\n"
-        "• Smart Delivery Channels: Automated WhatsApp and push notification alerts for high-risk hourly threshold breaches."
+        "• Tier 1: B2B CampusAir SaaS (Schools & Academies): ₹2,500/mo subscription for automated outdoor scheduling & WhatsApp parent alerts (100 schools = ₹2.5L MRR).\n\n"
+        "• Tier 2: Logistics FleetSafe API (Zomato, Swiggy, Blinkit): Dynamic route exposure rerouting & rider hazard protection (pay-per-call / hub licensing).\n\n"
+        "• Tier 3: Certified Clean Air Marketplace: Contextual in-app recommendations for verified N95 respirators & HEPA purifiers (8–12% affiliate commission).\n\n"
+        "• Tier 4: B2G Municipal Dispatch (Smart Cities): Predictive route planning for municipal smog guns and water sprinklers before evening inversion."
     )
     p.font.name = "Calibri"
-    p.font.size = Pt(10.8)
+    p.font.size = Pt(10.2)
     p.font.color.rgb = TEXT_BODY
     p.space_before = Pt(6)
 
@@ -961,12 +961,14 @@ def build_presentation():
     add_footer(slide8, 8)
 
     slide8.notes_slide.notes_text_frame.text = (
-        "SPEAKER SCRIPT — SLIDE 8 (IMPACT & FUTURE SCOPE):\n"
-        "In conclusion, AirPulse is more than a hackathon prototype—it is a foundation for real-world environmental intelligence.\n\n"
-        "Our immediate beneficiaries are the citizens, schools, running clubs, and event organizers who need advance warning to protect respiratory health. "
-        "In subsequent rounds and our long-term startup roadmap, we plan to validate advanced ML models like Temporal Convolutional Networks, "
-        "integrate satellite aerosol data from Sentinel-5P, expand coverage across northern Indian cities, and deploy automated WhatsApp smart alerts.\n\n"
-        "We believe that clean air starts with clear awareness. With AirPulse, we: 'Predict Pollution. Understand Exposure. Make Better Decisions.'\n"
+        "SPEAKER SCRIPT — SLIDE 8 (IMPACT & REVENUE MODEL):\n"
+        "In conclusion, AirPulse is designed as a dual-engine environmental intelligence startup: maximizing public impact while ensuring strong commercial profitability.\n\n"
+        "On the public side, our core citizen dashboard is 100% free, empowering vulnerable families and students with timely exposure warnings.\n\n"
+        "On the commercial side, we generate sustainable revenue across three primary streams:\n"
+        "1. B2B CampusAir SaaS: Schools and colleges pay ₹2,500/month for automated outdoor schedule optimization and parent WhatsApp alerts. Just 100 schools yield ₹2.5 Lakhs Monthly Recurring Revenue.\n"
+        "2. B2B FleetSafe API: Quick-commerce delivery fleets like Zomato and Blinkit pay per-query to reroute delivery riders away from toxic chokepoints and trigger hazard equipment protocols.\n"
+        "3. Contextual Clean Air Marketplace: We earn 8% to 12% affiliate commission by connecting users in severe zones with verified, certified N95 respirators and HEPA purifiers.\n\n"
+        "Clean air starts with clear awareness. With AirPulse: 'Predict Pollution. Understand Exposure. Make Better Decisions.'\n"
         "Thank you so much, judges. We are now eager to take your questions!"
     )
 
