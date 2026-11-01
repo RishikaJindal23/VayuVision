@@ -23,6 +23,9 @@ from pydantic import BaseModel, Field
 from typing import List, Optional, Dict, Any
 from datetime import datetime, timedelta
 import math
+import urllib.parse
+import urllib.request
+import re
 
 app = FastAPI(
     title="VayuVision AI API",
@@ -171,6 +174,7 @@ class WhatsAppDemoRequest(BaseModel):
     phone_number: str = Field(..., example="+919876543210")
     location_id: str = Field("anand_vihar", example="anand_vihar")
     alert_type: str = Field("spike_warning", description="spike_warning, clearing_window, daily_briefing")
+    bot_api_key: Optional[str] = Field(None, description="Optional CallMeBot API Key for automated background push")
 
 class WhatsAppDemoResponse(BaseModel):
     status: str
@@ -178,8 +182,11 @@ class WhatsAppDemoResponse(BaseModel):
     dispatched_at: str
     template_name: str
     rendered_message: str
+    wa_direct_url: str
     meta_cloud_api_payload_preview: Dict[str, Any]
     delivery_note: str
+    is_real_dispatch: bool = False
+    bot_provider: Optional[str] = None
 
 class ExposurePlanRequest(BaseModel):
     location_id: str = Field(..., example="anand_vihar")
@@ -898,9 +905,10 @@ def get_alerts(threshold: int = Query(350, description="Configurable AQI alert t
 @app.post("/api/alerts/whatsapp-demo", response_model=WhatsAppDemoResponse)
 def dispatch_whatsapp_demo_alert(req: WhatsAppDemoRequest):
     """
-    Modular WhatsApp Cloud API integration demonstration.
-    Validates mobile number, formats WhatsApp Business interactive template payload,
-    and returns simulated dispatch confirmation without making false claims of real transmission.
+    Live WhatsApp Dispatch & Webhook Gateway.
+    - Generates direct wa.me WhatsApp URL for instant browser/mobile launch.
+    - If bot_api_key is provided (CallMeBot), triggers automated background WhatsApp bot dispatch.
+    - Provides Meta Cloud API interactive payload for enterprise verification.
     """
     loc_name = LOCATIONS.get(req.location_id, LOCATIONS["anand_vihar"]).name
     peak_val = LOCATIONS.get(req.location_id, LOCATIONS["anand_vihar"]).baseline_aqi + 145
@@ -939,10 +947,43 @@ def dispatch_whatsapp_demo_alert(req: WhatsAppDemoRequest):
         )
         template_name = "vayuvision_daily_briefing_v1"
 
+    # Clean phone number: remove non-digits; if 10-digit Indian number, add 91
+    raw_digits = re.sub(r'\D', '', req.phone_number)
+    if len(raw_digits) == 10:
+        clean_phone = '91' + raw_digits
+    else:
+        clean_phone = raw_digits if raw_digits else '919876543210'
+
+    encoded_msg = urllib.parse.quote(rendered)
+    wa_direct_url = f"https://wa.me/{clean_phone}?text={encoded_msg}"
+
+    status = "READY_FOR_WHATSAPP_OPEN"
+    is_real = False
+    bot_provider = None
+    delivery_note = f"Alert formatted with live telemetry. Open in WhatsApp Web/App to deliver directly to +{clean_phone}."
+
+    # If user provided a CallMeBot API key, attempt automated background bot delivery
+    if req.bot_api_key and req.bot_api_key.strip():
+        try:
+            bot_endpoint = f"https://api.callmebot.com/whatsapp.php?phone=+{clean_phone}&text={encoded_msg}&apikey={req.bot_api_key.strip()}"
+            bot_req = urllib.request.Request(
+                bot_endpoint,
+                headers={"User-Agent": "VayuVisionAI-WhatsAppBot/2.0"}
+            )
+            with urllib.request.urlopen(bot_req, timeout=6) as resp:
+                if resp.status == 200:
+                    status = "DELIVERED_REAL_BOT"
+                    is_real = True
+                    bot_provider = "CallMeBot Gateway"
+                    delivery_note = f"Automated bot pushed real WhatsApp message to +{clean_phone}!"
+        except Exception as e:
+            status = "BOT_ATTEMPT_FALLBACK"
+            delivery_note = f"Bot gateway returned: {str(e)[:60]}. Fallback to wa.me instant launch enabled."
+
     meta_payload = {
         "messaging_product": "whatsapp",
         "recipient_type": "individual",
-        "to": req.phone_number,
+        "to": f"+{clean_phone}",
         "type": "template",
         "template": {
             "name": template_name,
@@ -961,13 +1002,16 @@ def dispatch_whatsapp_demo_alert(req: WhatsAppDemoRequest):
     }
 
     return WhatsAppDemoResponse(
-        status="DELIVERED_SIMULATED",
-        recipient=req.phone_number,
+        status=status,
+        recipient=f"+{clean_phone}",
         dispatched_at=datetime.now().strftime("%Y-%m-%d %H:%M:%S IST"),
         template_name=template_name,
         rendered_message=rendered,
+        wa_direct_url=wa_direct_url,
         meta_cloud_api_payload_preview=meta_payload,
-        delivery_note="Demo simulation successful. In production, configure WHATSAPP_API_TOKEN and WHATSAPP_PHONE_ID to broadcast live WhatsApp messages via Meta Graph API."
+        delivery_note=delivery_note,
+        is_real_dispatch=is_real,
+        bot_provider=bot_provider
     )
 
 @app.get("/api/recommendations")

@@ -640,14 +640,14 @@ export async function fetchAlerts(threshold = 350) {
   };
 }
 
-// WhatsApp alert demo dispatch
-export async function sendWhatsAppDemo({ phone_number, location_id, alert_type }) {
+// WhatsApp alert live dispatch & bridge
+export async function sendWhatsAppDemo({ phone_number, location_id, alert_type, bot_api_key }) {
   try {
     const res = await fetch(`${API_BASE_URL}/alerts/whatsapp-demo`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ phone_number, location_id, alert_type }),
-      signal: AbortSignal.timeout(4000)
+      body: JSON.stringify({ phone_number, location_id, alert_type, bot_api_key }),
+      signal: AbortSignal.timeout(6000)
     });
     if (res.ok) return await res.json();
   } catch (err) {
@@ -659,23 +659,30 @@ export async function sendWhatsAppDemo({ phone_number, location_id, alert_type }
 
   const rendered = `🚨 *VAYUVISION AI: SEVERE POLLUTION SPIKE ALERT*\n\n📍 *Location:* ${loc.name}\n⚠️ *Predicted Peak AQI:* ${Math.min(500, peakVal)} (Severe+)\n⏰ *Critical Window:* Today, 8:00 PM – Tomorrow 3:30 AM\n\n🌬️ *Cause:* Pyrotechnic smoke trapped beneath nocturnal boundary layer inversion.\n\n🛡️ *Action Plan:*\n• Stay indoors with doors & windows tightly sealed.\n• Run HEPA air purifiers in sleep quarters.\n• If stepping outside, wear a certified N95/FFP2 respirator.\n\n_Reply STOP to unsubscribe | VayuVision AI - Predict. Prepare. Protect._`;
 
+  // Clean phone
+  const rawDigits = (phone_number || "").replace(/\D/g, "");
+  const cleanPhone = rawDigits.length === 10 ? "91" + rawDigits : (rawDigits || "919876543210");
+  const waUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(rendered)}`;
+
   return {
-    status: "DELIVERED_SIMULATED",
-    recipient: phone_number,
+    status: "READY_FOR_WHATSAPP_OPEN",
+    recipient: `+${cleanPhone}`,
     dispatched_at: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }) + " IST",
     template_name: "vayuvision_severe_spike_warning_v2",
     rendered_message: rendered,
+    wa_direct_url: waUrl,
+    is_real_dispatch: false,
     meta_cloud_api_payload_preview: {
       messaging_product: "whatsapp",
       recipient_type: "individual",
-      to: phone_number,
+      to: `+${cleanPhone}`,
       type: "template",
       template: {
         name: "vayuvision_severe_spike_warning_v2",
         language: { code: "en_US" }
       }
     },
-    delivery_note: "Demo simulation successful. In production, configure WHATSAPP_API_TOKEN and WHATSAPP_PHONE_ID to broadcast live WhatsApp messages via Meta Graph API."
+    delivery_note: `Alert prepared with live telemetry. Open in WhatsApp Web/App to send directly to +${cleanPhone}.`
   };
 }
 
