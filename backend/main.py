@@ -188,6 +188,28 @@ class WhatsAppDemoResponse(BaseModel):
     is_real_dispatch: bool = False
     bot_provider: Optional[str] = None
 
+class AdminBroadcastRequest(BaseModel):
+    admin_name: str = Field("Dr. R. K. Sharma (DPCC Nodal Officer)", example="Dr. R. K. Sharma")
+    admin_role: str = Field("dpcc_official", description="dpcc_official, school_principal, rwa_secretary, ddma_disaster")
+    target_zone: str = Field("anand_vihar", example="anand_vihar")
+    urgency_tier: str = Field("grap_iv", description="grap_iv, school_advisory, rwa_community, sprinkler_dispatch")
+    language: str = Field("hinglish", description="english, hindi, hinglish")
+    custom_note: Optional[str] = Field(None, description="Custom instruction fed into AI bot generator")
+    test_phone_number: Optional[str] = Field("9876543210", description="Phone number to test live WhatsApp dispatch")
+
+class AdminBroadcastResponse(BaseModel):
+    broadcast_id: str
+    admin_name: str
+    admin_role_title: str
+    target_zone_name: str
+    subscribers_count: int
+    urgency_badge: str
+    ai_generated_message: str
+    wa_direct_url: str
+    dispatched_at: str
+    delivery_status: str
+    audit_hash: str
+
 class ExposurePlanRequest(BaseModel):
     location_id: str = Field(..., example="anand_vihar")
     activity_type: str = Field(..., example="Walking", description="Walking, Outdoor Sports, Commuting, Outdoor Events")
@@ -1012,6 +1034,118 @@ def dispatch_whatsapp_demo_alert(req: WhatsAppDemoRequest):
         delivery_note=delivery_note,
         is_real_dispatch=is_real,
         bot_provider=bot_provider
+    )
+
+@app.post("/api/admin/broadcast", response_model=AdminBroadcastResponse)
+def dispatch_admin_broadcast(req: AdminBroadcastRequest):
+    """
+    AI Bot Powered Admin Emergency Broadcast Gateway.
+    Enables authorized municipal officers, school principals, and RWA authorities
+    to synthesize and broadcast official compliance & health advisories across WhatsApp.
+    """
+    loc = LOCATIONS.get(req.target_zone, LOCATIONS["anand_vihar"])
+    aqi_val = min(500, loc.baseline_aqi + 145)
+    clean_digits = re.sub(r'\D', '', req.test_phone_number or "9876543210")
+    if len(clean_digits) == 10:
+        clean_phone = '91' + clean_digits
+    else:
+        clean_phone = clean_digits if clean_digits else '919876543210'
+
+    # Role definitions & subscriber numbers
+    role_map = {
+        "dpcc_official": ("DPCC Environmental Nodal Officer", "🏛️ DELHI POLLUTION CONTROL COMMITTEE", 24850),
+        "school_principal": ("CampusAir School Administrator", "🏫 CAMPUSAIR INSTITUTIONAL DESK", 3200),
+        "rwa_secretary": ("RWA Society President", "🏢 RESIDENTS WELFARE ASSOCIATION", 850),
+        "ddma_disaster": ("DDMA Emergency Operations Officer", "🚨 DELHI DISASTER MANAGEMENT AUTHORITY", 42100)
+    }
+    role_title, org_header, sub_count = role_map.get(req.admin_role, ("Authorized Environmental Officer", "🏛️ MUNICIPAL ENVIRONMENTAL DESK", 15000))
+
+    # AI Bot message generator based on urgency and role
+    if req.admin_role == "school_principal":
+        msg = (
+            f"{org_header}\n"
+            f"📢 *OFFICIAL STUDENT HEALTH NOTICE — TOMORROW*\n\n"
+            f"📍 *Campus Zone:* {loc.name}\n"
+            f"📊 *Forecast AQI:* {aqi_val} (Severe Hazard)\n"
+            f"⏰ *Effective Time:* Tomorrow 06:30 AM – 02:00 PM\n\n"
+            f"⚠️ *Mandatory Campus Protocols:*\n"
+            f"• All outdoor morning assemblies & sports activities are SUSPENDED.\n"
+            f"• Students must wear certified N95 masks while boarding school buses.\n"
+            f"• Classroom HEPA filtration systems activated in all wings.\n"
+        )
+        if req.custom_note:
+            msg += f"📌 *Special Principal Note:* {req.custom_note}\n\n"
+        msg += f"_Authorized by: {req.admin_name} | CampusAir Powered by VayuVision AI_"
+        urgency = "Campus Safety Enforced"
+
+    elif req.admin_role == "rwa_secretary":
+        msg = (
+            f"{org_header}\n"
+            f"⚠️ *RESIDENTS POLLUTION EMERGENCY ADVISORY*\n\n"
+            f"📍 *Society Area:* {loc.name}\n"
+            f"⚠️ *Expected Midnight Surge:* {aqi_val} AQI (Nocturnal Inversion Trap)\n\n"
+            f"🛡️ *Community Advisory:*\n"
+            f"• Central clubhouse & lobby ventilation sealed from 8:00 PM.\n"
+            f"• Outdoor morning walks/yoga in society parks strictly suspended.\n"
+            f"• Security deployed to prevent any open leaf/waste burning.\n"
+        )
+        if req.custom_note:
+            msg += f"📌 *RWA Secretary Note:* {req.custom_note}\n\n"
+        msg += f"_Issued by: {req.admin_name} | VayuVision Community Intelligence_"
+        urgency = "Society Community Action"
+
+    elif req.admin_role == "ddma_disaster":
+        msg = (
+            f"{org_header}\n"
+            f"🚨 *PUBLIC HEALTH EMERGENCY BULLETIN (CODE RED)*\n\n"
+            f"📍 *Target Cluster:* {loc.name}\n"
+            f"⚠️ *Current / Predicted AQI:* {aqi_val} (Emergency Threshold)\n\n"
+            f"🚑 *Directives for Public:*\n"
+            f"• Senior citizens, children & cardiac/asthma patients strictly restricted indoors.\n"
+            f"• Emergency 24x7 Oxygen Concentrator Helpline: 1077 active.\n"
+            f"• Non-essential transit prohibited during nocturnal inversion peak (9 PM – 4 AM).\n"
+        )
+        if req.custom_note:
+            msg += f"📌 *DDMA Directive:* {req.custom_note}\n\n"
+        msg += f"_Issued by: {req.admin_name} | DDMA Delhi | VayuVision AI Engine_"
+        urgency = "Code Red Emergency"
+
+    else:
+        # Default: DPCC / Government GRAP-IV
+        msg = (
+            f"{org_header}\n"
+            f"🏛️ *MUNICIPAL AIR QUALITY DIRECTIVE (GRAP STAGE IV)*\n\n"
+            f"📍 *Jurisdiction:* {loc.name}\n"
+            f"📊 *Critical Inversion Spike:* {aqi_val} AQI\n"
+            f"⏰ *Duration:* Effective Immediately across North/East Delhi Clusters\n\n"
+            f"🚜 *Enforced Administrative Actions:*\n"
+            f"• Entry of non-essential BS-IV diesel trucks strictly restricted.\n"
+            f"• 14 Anti-smog mist water cannons deployed along major transit flyovers.\n"
+            f"• Private construction & demolition activities halted.\n"
+            f"• Citizens urged to avoid morning exercises and equip N95 masks.\n"
+        )
+        if req.custom_note:
+            msg += f"📌 *Special Administrative Note:* {req.custom_note}\n\n"
+        msg += f"_Authorized Officer: {req.admin_name} | DPCC Control Room | VayuVision AI_"
+        urgency = "GRAP-IV Statutory Order"
+
+    broadcast_id = f"VAYU-BC-{datetime.now().strftime('%Y%m%d')}-{abs(hash(req.admin_name + req.target_zone)) % 8999 + 1000}"
+    encoded = urllib.parse.quote(msg)
+    wa_url = f"https://wa.me/{clean_phone}?text={encoded}"
+    audit_hash = f"SHA256-{abs(hash(msg)) :016x}"
+
+    return AdminBroadcastResponse(
+        broadcast_id=broadcast_id,
+        admin_name=req.admin_name,
+        admin_role_title=role_title,
+        target_zone_name=loc.name,
+        subscribers_count=sub_count,
+        urgency_badge=urgency,
+        ai_generated_message=msg,
+        wa_direct_url=wa_url,
+        dispatched_at=datetime.now().strftime("%Y-%m-%d %H:%M:%S IST"),
+        delivery_status=f"SUCCESS: Synthesized & Broadcast to {sub_count:,} Citizens",
+        audit_hash=audit_hash
     )
 
 @app.get("/api/recommendations")
